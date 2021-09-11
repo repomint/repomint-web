@@ -1,13 +1,15 @@
-# Celebrate
+# repomint
 ----
 [![Open Source Love svg2](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 <!-- <img src="assets/NNNNNNNNNNNNN" width="400"> -->
 <!-- <h2 align="center">____________________</h2> -->
 
+This project is under development.
+
 <h4 align="center">Mint generative NFTs for your GitHub repo releases.</h4>
 
-Created using [solana-labs/dapp-scaffold](https://github.com/solana-labs/dapp-scaffold)
+Created using [solana-labs/dapp-scaffold](https://github.com/solana-labs/dapp-scaffold).
 
 # Quick start
 ### __________________
@@ -48,14 +50,14 @@ Created using [solana-labs/dapp-scaffold](https://github.com/solana-labs/dapp-sc
 -----------------
 # Contributors
 
-[![](https://contrib.rocks/image?repo=cnp0/celebrate)](https://github.com/cnp0/celebrate/graphs/contributors)
+[![](https://contrib.rocks/image?repo=cnp0/repomint)](https://github.com/cnp0/repomint/graphs/contributors)
 
 ##### Made with [contributors-img](https://contrib.rocks).
 
 -----------------
 # License
-#### MIT © cnp0
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+#### Apache 2.0 © cnp0
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 ```bash
 by oran collins
 github.com/cnp0
@@ -83,11 +85,11 @@ ______________________
 <!-- FULL -->
 <!-- ---------------------------------- -->
 
-<!-- # celebrate -->
+<!-- # repomint -->
 <!-- ---- -->
 <!-- 
 [![Open Source Love svg2](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 <img src="assets/NNNNNNNNNNNNN" width="400">
 <h2 align="center">____________________</h2>
 <h4 align="center">________________________</h4>
@@ -199,14 +201,14 @@ ______________________
 -----------------
 # Contributors
 
-[![](https://contrib.rocks/image?repo=cnp0/celebrate)](https://github.com/cnp0/celebrate/graphs/contributors)
+[![](https://contrib.rocks/image?repo=cnp0/repomint)](https://github.com/cnp0/repomint/graphs/contributors)
 
 ##### Made with [contributors-img](https://contrib.rocks).
 
 -----------------
 # License
 #### MIT © cnp0
-[![MIT](https://img.shields.io/github/license/cnp0/celebrate.svg)](https://github.com/cnp0/celebrate/blob/master/LICENSE)
+[![MIT](https://img.shields.io/github/license/cnp0/repomint.svg)](https://github.com/cnp0/repomint/blob/master/LICENSE)
 -->
 
 <!-- 
@@ -228,9 +230,9 @@ ______________________
 ![Python](https://img.shields.io/badge/Python-Enabled-<COLOR>.svg)
 ![P5.js](https://img.shields.io/badge/P5.js-Enabled-pink.svg)
 [![Generic badge](https://img.shields.io/badge/<SUBJECT>-<STATUS>-<COLOR>.svg)](https://shields.io/)
-[![GitHub release](https://img.shields.io/github/release/cnp0/celebrate.svg)](https://GitHub.com/cnp0/celebrate/releases/)
-[![GitHub tag](https://img.shields.io/github/tag/cnp0/celebrate.svg)](https://GitHub.com/cnp0/celebrate/tags/)
-[![GitHub pull-requests](https://img.shields.io/github/issues-pr/cnp0/celebrate.svg)](https://GitHub.com/cnp0/celebrate/pull/)
+[![GitHub release](https://img.shields.io/github/release/cnp0/repomint.svg)](https://GitHub.com/cnp0/repomint/releases/)
+[![GitHub tag](https://img.shields.io/github/tag/cnp0/repomint.svg)](https://GitHub.com/cnp0/repomint/tags/)
+[![GitHub pull-requests](https://img.shields.io/github/issues-pr/cnp0/repomint.svg)](https://GitHub.com/cnp0/repomint/pull/)
 [![Website perso.crans.org](https://img.shields.io/website-up-down-green-red/http/www.orancollins.com.svg)](http://www.orancollins.com/) 
     -->
 
@@ -301,8 +303,8 @@ ______________________
 ### 
 ```bash
 cd ~
-git clone https://github.com/cnp0/celebrate.git
-cd celebrate
+git clone https://github.com/cnp0/repomint.git
+cd repomint
 pip install -r requirements.txt
 npm install
 ```
@@ -311,13 +313,13 @@ npm install
 ### Build
 ```bash
 cd ~
-git clone https://github.com/cnp0/celebrate.git
-cd celebrate
-docker build -t cnp0/celebrate:latest .  
+git clone https://github.com/cnp0/repomint.git
+cd repomint
+docker build -t cnp0/repomint:latest .  
 ```
 ### Run
 ```bash
-docker run -it --rm --name cnp0/celebrate:latest  
+docker run -it --rm --name cnp0/repomint:latest  
 ```
 ### Docker-compose
 ```bash
@@ -329,9 +331,9 @@ docker-compose up
 
 # Publish Docker Image
 ```bash
-docker build -t cnp0/celebrate:latest .
+docker build -t cnp0/repomint:latest .
 docker login
-docker push cnp0/celebrate:latest
+docker push cnp0/repomint:latest
 ```
 
  -->
