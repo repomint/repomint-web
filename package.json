@@ -1,10 +1,10 @@
 {
-  "name": "dapp-scaffold",
+  "name": "repomint",
   "version": "0.1.0",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/solana-labs/dapp-scaffold"
+    "url": "https://github.com/cnp0/repomint"
   },
   "homepage": ".",
   "scripts": {

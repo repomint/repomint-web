@@ -31,7 +31,7 @@ export const LABELS = {
   MENU_FAUCET: "Faucet",
   MENU_TRANSACTION: "Transactions",
   MARGIN_TRADING: "Margin Trading",
-  APP_TITLE: "Solana DAPP",
+  APP_TITLE: "repomint",
   CONNECT_BUTTON: "Connect",
   WALLET_TOOLTIP: "Wallet public key",
   WALLET_BALANCE: "Wallet balance",

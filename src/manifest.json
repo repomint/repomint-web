@@ -1,6 +1,6 @@
 {
-  "name": "DApp Starter",
-  "short_name": "DApp Starter",
+  "name": "repomint",
+  "short_name": "repomint",
   "display": "standalone",
   "start_url": "./",
   "theme_color": "#002140",
