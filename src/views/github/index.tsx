@@ -14,7 +14,7 @@ export const GithubOAuthView = () => {
       const response = await fetch(token_auth_url);
       const responseData = await response.json();
 
-      setMessage(responseData.token);
+      setMessage(responseData.token.substr(0, 3) + "...");
     } catch (error: any) {
       setMessage(error.message);
     }
