@@ -1,2 +1,2 @@
 export * from "./account";
-// export * from "./gihtub";
+export * from "./github";

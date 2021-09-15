@@ -6,7 +6,7 @@ import { AccountsProvider } from "./contexts/accounts";
 import { MarketProvider } from "./contexts/market";
 import { AppLayout } from "./components/Layout";
 
-import { FaucetView, HomeView, GithubOAuthView } from "./views";
+import { FaucetView, HomeView, OAuthCallbackView } from "./views";
 import {
   getLedgerWallet,
   getMathWallet,
@@ -47,7 +47,7 @@ export function Routes() {
                 <Switch>
                   <Route exact path="/" component={() => <HomeView />} />
                   <Route exact path="/faucet" children={<FaucetView />} />
-                  <Route exact path="/github/callback" children={<GithubOAuthView />} />
+                  <Route exact path="/github/callback" children={<OAuthCallbackView />} />
                 </Switch>
               </AppLayout>
             </MarketProvider>

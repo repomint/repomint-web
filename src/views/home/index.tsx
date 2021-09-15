@@ -1,6 +1,6 @@
 import { WalletMultiButton } from "@solana/wallet-adapter-ant-design";
 import { Button, Col, Row } from "antd";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { TokenIcon } from "../../components/TokenIcon";
 import { useConnectionConfig } from "../../contexts/connection";
@@ -9,6 +9,8 @@ import { useUserBalance, useUserTotalBalance } from "../../hooks";
 import { WRAPPED_SOL_MINT } from "../../utils/ids";
 import { formatUSD } from "../../utils/utils";
 
+import { parseOAuthCode, getOAuthToken } from "./../../actions";
+
 export const HomeView = () => {
   const { marketEmitter, midPriceInUSD } = useMarkets();
   const { tokenMap } = useConnectionConfig();
@@ -16,6 +18,8 @@ export const HomeView = () => {
   const SRM = useUserBalance(SRM_ADDRESS);
   const SOL = useUserBalance(WRAPPED_SOL_MINT);
   const { balanceInUSD: totalBalanceInUSD } = useUserTotalBalance();
+
+  const [oauthToken, setOAuthToken] = useState<string>("")
 
   useEffect(() => {
     const refreshTotal = () => {};
@@ -31,6 +35,20 @@ export const HomeView = () => {
     };
   }, [marketEmitter, midPriceInUSD, tokenMap]);
 
+  // TODO: 1. is this the right place for this and 2. is it okay to use two useEffects?
+  useEffect(() => {
+    async function getAuthToken() {
+      const code = parseOAuthCode() || "";
+      const oauthToken = await getOAuthToken(code);
+
+      setOAuthToken(oauthToken);
+    }
+
+    if (oauthToken === "") {
+      getAuthToken();
+    }
+  }, [oauthToken, setOAuthToken])
+  
   return (
     <Row gutter={[16, 16]} align="middle">
       <Col span={24}>
