@@ -19,7 +19,10 @@ export const HomeView = () => {
   const SOL = useUserBalance(WRAPPED_SOL_MINT);
   const { balanceInUSD: totalBalanceInUSD } = useUserTotalBalance();
 
-  const [oauthToken, setOAuthToken] = useState<any>(null);
+  // TODO: don't store token as state
+  const [oauthToken, setOAuthToken] = useState<string>("");
+
+  // TODO: define the userInfo object
   const [userInfo, setUserInfo] = useState<any>(null);
 
   useEffect(() => {
@@ -42,19 +45,19 @@ export const HomeView = () => {
       const code = gh.parseOAuthCode() || null;
 
       if (code) {
-        const oauthToken = await gh.getOAuthToken(code);
-        setOAuthToken(oauthToken);
+        const token = await gh.getOAuthToken({code: code}) || "";
+        setOAuthToken(token);
       }      
     }
 
-    if (!oauthToken) {
+    if (oauthToken === "") {
       populateOAuthToken();
     }
   }, [oauthToken, setOAuthToken])
 
   useEffect(() => {
     async function populateUserInfo() {
-      const userInfo = await gh.getUserInfo(oauthToken);
+      const userInfo = await gh.getUserInfo({token: oauthToken});
 
       setUserInfo(userInfo);
     }
