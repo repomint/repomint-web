@@ -19,7 +19,7 @@ export const Settings = () => {
     <>
       <div style={{ display: "grid" }}>
         <Button type="primary" href={githubOAuthURL}>
-          Login With GitHub
+          Connect to GitHub
         </Button>
         <hr/>
 
