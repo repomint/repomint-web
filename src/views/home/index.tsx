@@ -9,7 +9,7 @@ import { useUserBalance, useUserTotalBalance } from "../../hooks";
 import { WRAPPED_SOL_MINT } from "../../utils/ids";
 import { formatUSD } from "../../utils/utils";
 
-import * as gh from "./../../actions";
+import * as gh from "./../../actions/github";
 
 export const HomeView = () => {
   const { marketEmitter, midPriceInUSD } = useMarkets();
