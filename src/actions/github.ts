@@ -13,6 +13,7 @@ const callGatekeeper = (code: string) => {
     if (code === "") {
         return ""
     }
+    
     return fetch(url)
         .then(response => response.json())
         .then(function(response) {
@@ -55,8 +56,7 @@ export const getUserInfo = (token: string) => {
             return response;
         })
         .catch(function(error) {
-            // throw new Error("Gatekeeper call was unsuccessful");
-            console.log("Gatekeeper call was unsuccessful");
+            console.log("GitHub API call was unsuccessful");
 
             return null
         })

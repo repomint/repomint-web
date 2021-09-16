@@ -38,7 +38,7 @@ export const HomeView = () => {
 
   // TODO: 1. is this the right place for this and 2. is it okay to use two useEffects?
   useEffect(() => {
-    async function getOAuthToken() {
+    async function populateOAuthToken() {
       const code = gh.parseOAuthCode() || null;
 
       if (code) {
@@ -48,19 +48,19 @@ export const HomeView = () => {
     }
 
     if (!oauthToken) {
-      getOAuthToken();
+      populateOAuthToken();
     }
   }, [oauthToken, setOAuthToken])
 
   useEffect(() => {
-    async function getUserInfo() {
+    async function populateUserInfo() {
       const userInfo = await gh.getUserInfo(oauthToken);
 
       setUserInfo(userInfo);
     }
 
     if (oauthToken) {
-      getUserInfo();
+      populateUserInfo();
     }
   }, [userInfo, oauthToken, setUserInfo])
   
