@@ -6,8 +6,9 @@ import { WalletModalProvider } from "@solana/wallet-adapter-ant-design";
 
 import { LABELS } from "../../constants";
 import { AppBar } from "../AppBar";
+import * as Styles from './styled';
 
-const { Header, Content } = Layout;
+const { Header } = Layout;
 
 export const AppLayout = React.memo(({ children }) => {
   return (
@@ -20,9 +21,14 @@ export const AppLayout = React.memo(({ children }) => {
                 <h2>{LABELS.APP_TITLE}</h2>
               </div>
             </Link>
+            {/* @TODO we'll leave the appbar for now, will intro the searchbar later */}
             <AppBar />
           </Header>
-          <Content style={{ padding: "0 50px" }}>{children}</Content>
+          <Styles.Main>
+            <Styles.MainContent>
+              {children}
+            </Styles.MainContent>
+          </Styles.Main>
         </Layout>
       </div>
     </WalletModalProvider>
