@@ -9,7 +9,7 @@ import { useUserBalance, useUserTotalBalance } from "../../hooks";
 import { WRAPPED_SOL_MINT } from "../../utils/ids";
 import { formatUSD } from "../../utils/utils";
 
-import { parseOAuthCode, getOAuthToken } from "./../../actions";
+import * as gh from "./../../actions";
 
 export const HomeView = () => {
   const { marketEmitter, midPriceInUSD } = useMarkets();
@@ -19,7 +19,8 @@ export const HomeView = () => {
   const SOL = useUserBalance(WRAPPED_SOL_MINT);
   const { balanceInUSD: totalBalanceInUSD } = useUserTotalBalance();
 
-  const [oauthToken, setOAuthToken] = useState<string>("")
+  const [oauthToken, setOAuthToken] = useState<any>(null);
+  const [userInfo, setUserInfo] = useState<any>(null);
 
   useEffect(() => {
     const refreshTotal = () => {};
@@ -37,17 +38,31 @@ export const HomeView = () => {
 
   // TODO: 1. is this the right place for this and 2. is it okay to use two useEffects?
   useEffect(() => {
-    async function getAuthToken() {
-      const code = parseOAuthCode() || "";
-      const oauthToken = await getOAuthToken(code);
+    async function getOAuthToken() {
+      const code = gh.parseOAuthCode() || null;
 
-      setOAuthToken(oauthToken);
+      if (code) {
+        const oauthToken = await gh.getOAuthToken(code);
+        setOAuthToken(oauthToken);
+      }      
     }
 
-    if (oauthToken === "") {
-      getAuthToken();
+    if (!oauthToken) {
+      getOAuthToken();
     }
   }, [oauthToken, setOAuthToken])
+
+  useEffect(() => {
+    async function getUserInfo() {
+      const userInfo = await gh.getUserInfo(oauthToken);
+
+      setUserInfo(userInfo);
+    }
+
+    if (oauthToken) {
+      getUserInfo();
+    }
+  }, [userInfo, oauthToken, setUserInfo])
   
   return (
     <Row gutter={[16, 16]} align="middle">
@@ -60,6 +75,7 @@ export const HomeView = () => {
           <TokenIcon mintAddress={SRM_ADDRESS} /> SRM: {SRM?.balance} (
           {formatUSD.format(SRM?.balanceInUSD)})
         </h2>
+        <div>{userInfo && JSON.stringify(userInfo)}</div>
       </Col>
 
       <Col span={12}>
