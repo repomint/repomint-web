@@ -46,6 +46,9 @@ declare module "styled-components" {
       md2: string;
       lg: string;
     };
+    width: {
+      main: string;
+    };
     zIndex: {
       [key: string]: number;
       "1st": number;
@@ -98,6 +101,9 @@ export const theme: DefaultTheme = {
   },
   border: {
     "10px": "0.625rem",
+  },
+  width: {
+    main: "83.5rem", // 1336px
   },
   spacing: {
     "50px": "3.125rem",
