@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Redirect } from 'react-router-dom';
 
 import { parseOAuthCode } from './../../actions';
@@ -6,16 +6,7 @@ import { parseOAuthCode } from './../../actions';
 
 // TODO: use state for verification + dont redirect
 export const OAuthCallbackView = () => {
-  const [code, setCode] = useState<string>("")
-  
-
-  // TODO: is this something that can be initialized?
-  //       or does this need to be implemented better?
-  if (code === "") {
-    const newCode = parseOAuthCode() || "";
-
-    setCode(newCode);
-  }
+  const code = parseOAuthCode() || "";
   
   return <Redirect to={`/?code=${code}`} />
 };

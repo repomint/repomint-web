@@ -11,6 +11,91 @@ import { formatUSD } from "../../utils/utils";
 
 import * as gh from "./../../actions/github";
 
+
+// TODO: octokit.js
+interface userInfoType {
+  login: string,
+  id: number,
+  avatarUrl: string,
+  gravatarId: any, // number?
+  url: string,
+  htmlUrl: string,
+  followersUrl: string,
+  followingUrl: string,
+  gistsUrl: string,
+  starredUrl: string
+  subscriptionUrl: string,
+  organizationsUrl: string,
+  reposUrl: string,
+  eventsUrl: string,
+  receivedEventsUrl: string,
+  type: string,
+  siteAdmin: boolean,
+  name: any, // nullable
+  company: any, // nullable
+  blog: string,
+  location: string,
+  email: any, // nullable
+  hireable: any // nullable
+  bio: string, // data like this is prob nullable in general
+  twitterUsername: string,
+  publicRepos: number,
+  publicGists: number,
+  followers: number,
+  following: number,
+  createdAt: string,
+  updatedAt: string,
+  privateGists: number,
+  totalPrivateRepos: number,
+  ownedPrivateRepos: number,
+  diskUsage: number,
+  collaborators: number,
+  twoFactorAuth: boolean,
+  plan: object // { name, space, collaborators, privateRepos } could nest another struct
+};
+
+const DEFAULT_USER_INFO: userInfoType = {
+  login: "",
+  id: 0,
+  avatarUrl: "",
+  gravatarId: null,
+  url: "",
+  htmlUrl: "",
+  followersUrl: "",
+  followingUrl: "",
+  gistsUrl: "",
+  starredUrl: "",
+  subscriptionUrl: "",
+  organizationsUrl: "",
+  reposUrl: "",
+  eventsUrl: "",
+  receivedEventsUrl: "",
+  type: "",
+  siteAdmin: false,
+  name: null, // nullable
+  company: null, // nullable
+  blog: "",
+  location: "",
+  email: null, // nullable
+  hireable: null, // nullable
+  bio: "", // data like this is prob nullable in general
+  twitterUsername: "",
+  publicRepos: 0,
+  publicGists: 0,
+  followers: 0,
+  following: 0,
+  createdAt: "",
+  updatedAt: "",
+  privateGists: 0,
+  totalPrivateRepos: 0,
+  ownedPrivateRepos: 0,
+  diskUsage: 0,
+  collaborators: 0,
+  twoFactorAuth: false,
+  plan: {} // { name, space, collaborators, privateRepos } could nest another struct
+};
+
+
 export const HomeView = () => {
   const { marketEmitter, midPriceInUSD } = useMarkets();
   const { tokenMap } = useConnectionConfig();
@@ -22,8 +107,8 @@ export const HomeView = () => {
   // TODO: don't store token as state
   const [oauthToken, setOAuthToken] = useState<string>("");
 
-  // TODO: define the userInfo object
-  const [userInfo, setUserInfo] = useState<any>(null);
+  // TODO: octokit.js
+  const [userInfo, setUserInfo] = useState<userInfoType>(DEFAULT_USER_INFO);
 
   useEffect(() => {
     const refreshTotal = () => {};
@@ -78,7 +163,7 @@ export const HomeView = () => {
           <TokenIcon mintAddress={SRM_ADDRESS} /> SRM: {SRM?.balance} (
           {formatUSD.format(SRM?.balanceInUSD)})
         </h2>
-        <div>{userInfo && JSON.stringify(userInfo)}</div>
+        <div>{userInfo !== DEFAULT_USER_INFO && JSON.stringify(userInfo)}</div>
       </Col>
 
       <Col span={12}>
