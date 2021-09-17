@@ -3,6 +3,19 @@ import { Button, Select } from "antd";
 import { ENDPOINTS, useConnectionConfig } from "../../contexts/connection";
 import { useWallet } from "@solana/wallet-adapter-react";
 
+
+// TODO: handle missing env vars
+const redirect_uri = process.env.REACT_APP_REDIRECT_URI || "";
+const client_id = process.env.REACT_APP_GITHUB_OAUTH_CLIENT_ID || "";
+const githubOAuthHost = "https://github.com";
+
+let githubOAuthURL = new URL("/login/oauth/authorize", githubOAuthHost);
+
+githubOAuthURL.searchParams.set("client_id", client_id);
+githubOAuthURL.searchParams.set("scope", "user")
+githubOAuthURL.searchParams.set("redirect_uri", redirect_uri);
+
+
 export const Settings = () => {
   const { connected, disconnect } = useWallet();
   const { endpoint, setEndpoint } = useConnectionConfig();
@@ -10,6 +23,11 @@ export const Settings = () => {
   return (
     <>
       <div style={{ display: "grid" }}>
+        <Button type="primary" href={githubOAuthURL.toString()}>
+          Connect to GitHub
+        </Button>
+        <hr/>
+
         Network:{" "}
         <Select
           onSelect={setEndpoint}
