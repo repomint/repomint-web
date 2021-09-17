@@ -1,5 +1,6 @@
-import { HashRouter, Route, Switch } from "react-router-dom";
 import React, { useMemo } from "react";
+import { ThemeProvider } from 'styled-components';
+import { HashRouter, Route, Switch } from "react-router-dom";
 import { WalletProvider } from "@solana/wallet-adapter-react";
 import { ConnectionProvider } from "./contexts/connection";
 import { AccountsProvider } from "./contexts/accounts";
@@ -7,6 +8,7 @@ import { MarketProvider } from "./contexts/market";
 import { AppLayout } from "./components/Layout";
 
 import { FaucetView, HomeView } from "./views";
+import { theme } from "src/styles/theme";
 import {
   getLedgerWallet,
   getMathWallet,
@@ -43,12 +45,14 @@ export function Routes() {
         <WalletProvider wallets={wallets} autoConnect>
           <AccountsProvider>
             <MarketProvider>
-              <AppLayout>
-                <Switch>
-                  <Route exact path="/" component={() => <HomeView />} />
-                  <Route exact path="/faucet" children={<FaucetView />} />
-                </Switch>
-              </AppLayout>
+              <ThemeProvider theme={theme}>
+                <AppLayout>
+                  <Switch>
+                    <Route exact path="/" component={() => <HomeView />} />
+                    <Route exact path="/faucet" children={<FaucetView />} />
+                  </Switch>
+                </AppLayout>
+              </ThemeProvider>
             </MarketProvider>
           </AccountsProvider>
         </WalletProvider>
