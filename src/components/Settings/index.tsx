@@ -23,7 +23,8 @@ export const Settings = () => {
   return (
     <>
       <div style={{ display: "grid" }}>
-        <Button type="primary" href={githubOAuthURL.toString()}>
+        {/* <Button type="primary" href={githubOAuthURL.toString()}> */}
+        <Button type="primary" href='https://github.com/login/oauth/authorize?client_id=86d9bf07b52f6d3456c1'>
           Connect to GitHub
         </Button>
         <hr/>
