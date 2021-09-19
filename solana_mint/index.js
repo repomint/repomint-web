@@ -10,7 +10,7 @@ const bs58 = require('bs58');
   );
 
   // decode wallet private key
-  const fromDecoded = bs58.decode('4qooCCmz12QUrkQCAnCwUyrH64mGv7hHKdRpK84QhKHXxba83cgr2iPVBqygAwAzoYKaz6RpZGYTZ4feR7iuFNyb');
+  const fromDecoded = bs58.decode('wallet 1 private key here');
   // Generate a new wallet keypair and airdrop SOL
   const fromWallet = web3.Keypair.fromSecretKey(fromDecoded);
 
@@ -39,7 +39,7 @@ const bs58 = require('bs58');
     fromWallet.publicKey,
   );
 
-  const toDecoded = bs58.decode('2V5mJ4Qw8VAnPhCpJBZ1tGCz99DczgygfkAJtQtPbEshtvTKAaj4kRZYcVeaXgQriihfNitLM5umD9p2XyFZ4EjL');
+  const toDecoded = bs58.decode('wallet 2 private key here');
   // Generate a new wallet to receive newly minted token
   let toWallet = web3.Keypair.fromSecretKey(toDecoded);
 
