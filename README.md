@@ -27,12 +27,12 @@ For docs:
 - Github web app flow - https://docs.github.com/en/developers/apps/building-oauth-apps/authorizing-oauth-apps#parameters
 - Github API - https://docs.github.com/en/rest/reference/users
 
-## .env
+## Environment Variables
 
-Add a .env file 
+Set environment variables
 ```bash
-export REACT_APP_GITHUB_OAUTH_CLIENT_ID=
-export REACT_APP_GITHUB_OAUTH_CLIENT_SECRET=
+export REACT_APP_GITHUB_OAUTH_CLIENT_ID=...
+export REACT_APP_GITHUB_OAUTH_CLIENT_SECRET=...
 ```
 
 # Summary
