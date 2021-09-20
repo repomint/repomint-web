@@ -2,6 +2,8 @@ const cors = require('cors');
 const express = require('express');
 const { isEmpty } = require('lodash');
 const githubOAuth = require('./github_oauth');
+const userController = require('./controllers/user');
+const repositoryController = require('./controllers/repository');
 
 const app = express();
 app.use(cors());
@@ -30,10 +32,9 @@ app.get('/auth', async function (req, res) {
     })
   }
 })
-
-app.get('/repos', async function (req, res) {
-
-})
+app.get('/user', userController.info)
+app.get('/repos/user', repositoryController.user)
+app.get('/repos/langs', repositoryController.langs)
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
