@@ -11,23 +11,7 @@ Mint generative NFTs for your GitHub releases.
 
 Bootstrapped with [solana-labs/dapp-scaffold](https://github.com/solana-labs/dapp-scaffold).
 
-# Quick start
-
-1. Start [Gatekeeper](https://github.com/cnp0/gatekeeper)
-```bash
-export OAUTH_CLIENT_ID=...
-export OAUTH_CLIENT_SECRET=...
-```
-
-2. Add `repomint` .env
-
-```env
-REACT_APP_GITHUB_OAUTH_CLIENT_ID=...
-REACT_APP_REDIRECT_URI=...
-REACT_APP_GATEKEEPER_URL=...
-```
-
-# Github Oauth
+# Github OAuth
 
 We use ExpressJS server to get access token, with this setup we would have React and Express on another port default is 4000.
 Run both with `yarn start`.
@@ -43,6 +27,14 @@ For docs:
 - Github web app flow - https://docs.github.com/en/developers/apps/building-oauth-apps/authorizing-oauth-apps#parameters
 - Github API - https://docs.github.com/en/rest/reference/users
 
+## .env
+
+Add a .env file 
+```bash
+export REACT_APP_GITHUB_OAUTH_CLIENT_ID=
+export REACT_APP_GITHUB_OAUTH_CLIENT_SECRET=
+```
+
 # Summary
 
 ### -  *[Contributors](#Contributors)*
@@ -51,17 +43,11 @@ For docs:
 -----------------
 # Contributors
 
-[![](https://contrib.rocks/image?repo=cnp0/repomint)](https://github.com/cnp0/repomint/graphs/contributors)
+[![](https://contrib.rocks/image?repo=repomint/repomint)](https://github.com/repomint/repomint/graphs/contributors)
 
 ##### Made with [contributors-img](https://contrib.rocks).
 
 -----------------
 # License
-#### Apache 2.0 © cnp0
+#### Apache 2.0 © repomint
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-```bash
-by oran collins
-github.com/cnp0
-oranbusiness@gmail.com
-______________________
-```

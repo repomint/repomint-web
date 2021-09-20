@@ -24,7 +24,7 @@ export const HomeView = () => {
   const [userInfo, setUserInfo] = useState<UserInfoType | null>(null);
 
   useEffect(() => {
-    const refreshTotal = () => {};
+    const refreshTotal = () => { };
 
     const dispose = marketEmitter.onMarket(() => {
       refreshTotal();
@@ -41,12 +41,18 @@ export const HomeView = () => {
     const ghToken = Cookies.get('gh_token');
 
     async function getAccessToken() {
-      const code = gh.parseOAuthCode() || null;      
+      const code = gh.parseOAuthCode() || null;
 
       if (code) {
         const { data } = await axios.get(`http://localhost:4000/auth?code=${code}`);
         if (data.success && !isEmpty(data.data.token)) {
           Cookies.set('gh_token', data.data.token)
+
+          // const userRes = await axios.get(`https://api.github.com/user`, { headers: new Headers({ "Authorization": `token ${data.data.token}` }) });
+
+          // if (userRes.data.success && !isEmpty(userRes.data)) {
+          //   setUserInfo(userRes.data)
+          // }
         } else {
           console.log('reauthenticate on click of connect to github button')
           window.location.href = `https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GITHUB_OAUTH_CLIENT_ID}`
@@ -62,7 +68,7 @@ export const HomeView = () => {
   return (
     <Row gutter={[16, 16]} align="middle">
       <Col span={24}>
-        { userInfo &&
+        {userInfo &&
           <>
             {userInfo.login} is connected! <br />
             Public repos: {userInfo.public_repos} <br />
