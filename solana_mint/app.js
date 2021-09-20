@@ -1,7 +1,7 @@
 const cors = require('cors');
 const express = require('express');
 const { isEmpty } = require('lodash');
-const octokitUserAuth = require('./octokit_oauth');
+const githubOAuth = require('./github_oauth');
 
 const app = express();
 app.use(cors());
@@ -11,10 +11,16 @@ app.get('/auth', async function (req, res) {
 
   if (!isEmpty(code)) {
     try {
-      const authRes = await octokitUserAuth({ code });
+      const authRes = await githubOAuth({ code });
+      console.log('authRes', authRes)
       res.json(authRes);
     } catch (err) {
       console.error(`Something went wrong on auth: ${err}`);
+      res.json({
+        success: false,
+        message: 'Something went wrong',
+        data: null
+      })
     }
   } else {
     res.json({
@@ -23,6 +29,10 @@ app.get('/auth', async function (req, res) {
       data: null
     })
   }
+})
+
+app.get('/repos', async function (req, res) {
+
 })
 
 const PORT = process.env.PORT || 4000;

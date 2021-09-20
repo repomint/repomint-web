@@ -1,3 +1,6 @@
+import axios from "axios";
+import Cookies from "js-cookie";
+import { isEmpty } from "lodash";
 import { WalletMultiButton } from "@solana/wallet-adapter-ant-design";
 import { Button, Col, Row } from "antd";
 import React, { useEffect, useState } from "react";
@@ -10,7 +13,6 @@ import { WRAPPED_SOL_MINT } from "../../utils/ids";
 import { formatUSD } from "../../utils/utils";
 import { UserInfoType } from "src/types/octokit";
 import * as gh from "../../actions/github";
-import axios from "axios";
 
 export const HomeView = () => {
   const { marketEmitter, midPriceInUSD } = useMarkets();
@@ -19,7 +21,6 @@ export const HomeView = () => {
   const SRM = useUserBalance(SRM_ADDRESS);
   const SOL = useUserBalance(WRAPPED_SOL_MINT);
   const { balanceInUSD: totalBalanceInUSD } = useUserTotalBalance();
-  // TODO: octokit.js
   const [userInfo, setUserInfo] = useState<UserInfoType | null>(null);
 
   useEffect(() => {
@@ -37,20 +38,24 @@ export const HomeView = () => {
   }, [marketEmitter, midPriceInUSD, tokenMap]);
 
   useEffect(() => {
-    async function getUserInfo() {
-      const code = gh.parseOAuthCode() || null;
+    const ghToken = Cookies.get('gh_token');
+
+    async function getAccessToken() {
+      const code = gh.parseOAuthCode() || null;      
 
       if (code) {
         const { data } = await axios.get(`http://localhost:4000/auth?code=${code}`);
-        if (data.success) {
-          console.log('data', { data })
-          setUserInfo(data.data);
+        if (data.success && !isEmpty(data.data.token)) {
+          Cookies.set('gh_token', data.data.token)
+        } else {
+          console.log('reauthenticate on click of connect to github button')
+          window.location.href = `https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GITHUB_OAUTH_CLIENT_ID}`
         }
-      }      
+      }
     }
 
-    if (userInfo === null) {
-      getUserInfo();
+    if (isEmpty(ghToken)) {
+      getAccessToken();
     }
   }, [userInfo])
 
