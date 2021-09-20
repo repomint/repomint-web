@@ -6,9 +6,9 @@ const octokitUserAuth = async ({ code }) => {
   const octokit = new Octokit({
     authStrategy: createOAuthUserAuth,
     auth: {
-      clientId: process.env.OCTOKIT_GITHUB_OAUTH_CLIENT_ID || '86d9bf07b52f6d3456c1',
-      clientSecret: process.env.OCTOKIT_GITHUB_OAUTH_CLIENT_SECRET || '3ad24131c33c2ee41c3f39f4907eae7d19270792',
-      code: code,
+      clientId: process.env.OCTOKIT_GITHUB_OAUTH_CLIENT_ID,
+      clientSecret: process.env.OCTOKIT_GITHUB_OAUTH_CLIENT_SECRET,
+      code
     },
   });
   

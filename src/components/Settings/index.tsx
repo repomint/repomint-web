@@ -1,32 +1,46 @@
-import React from "react";
+
+import Cookies from "js-cookie";
+import { isEmpty } from "lodash";
 import { Button, Select } from "antd";
+import React, { useEffect, useState } from "react";
 import { ENDPOINTS, useConnectionConfig } from "../../contexts/connection";
 import { useWallet } from "@solana/wallet-adapter-react";
-
-
-// TODO: handle missing env vars
-const redirect_uri = process.env.REACT_APP_REDIRECT_URI || "";
-const client_id = process.env.REACT_APP_GITHUB_OAUTH_CLIENT_ID || "";
-const githubOAuthHost = "https://github.com";
-
-let githubOAuthURL = new URL("/login/oauth/authorize", githubOAuthHost);
-
-githubOAuthURL.searchParams.set("client_id", client_id);
-githubOAuthURL.searchParams.set("scope", "user")
-githubOAuthURL.searchParams.set("redirect_uri", redirect_uri);
 
 
 export const Settings = () => {
   const { connected, disconnect } = useWallet();
   const { endpoint, setEndpoint } = useConnectionConfig();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const ghToken = Cookies.get('gh_token');
+
+    if (!isEmpty(ghToken)) {
+      setIsLoggedIn(true);
+    }
+  }, [])
+
+  const logout = () => {
+    Cookies.remove('gh_token')
+    window.location.href = '/'
+  }
 
   return (
     <>
       <div style={{ display: "grid" }}>
-        {/* <Button type="primary" href={githubOAuthURL.toString()}> */}
-        <Button type="primary" href='https://github.com/login/oauth/authorize?client_id=86d9bf07b52f6d3456c1'>
-          Connect to GitHub
-        </Button>
+        {
+          isLoggedIn ?
+          <>
+            Github Connected <br />
+            <Button type="primary" onClick={logout}>
+              Logout
+            </Button>  
+          </>
+          :
+          <Button type="primary" href={`https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GITHUB_OAUTH_CLIENT_ID}`}>
+            Connect to GitHub
+          </Button>
+        }
         <hr/>
 
         Network:{" "}
