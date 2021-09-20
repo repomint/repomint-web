@@ -1,6 +1,3 @@
-[submodule "gatekeeper"]
-	path = gatekeeper
-	url = https://github.com/cnp0/gatekeeper
 [submodule "metaplex-api"]
 	path = metaplex-api
-	url = https://github.com/cnp0/metaplex-api
+	url = https://github.com/repomint/metaplex-api
