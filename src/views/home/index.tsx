@@ -5,14 +5,15 @@ import { WalletMultiButton } from "@solana/wallet-adapter-ant-design";
 import { Button, Col, Row } from "antd";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import * as gh from "../../actions/github";
+import { formatUSD } from "../../utils/utils";
+import { WRAPPED_SOL_MINT } from "../../utils/ids";
+import Repository from "src/components/Repository";
+import { useMarkets } from "../../contexts/market";
 import { TokenIcon } from "../../components/TokenIcon";
 import { useConnectionConfig } from "../../contexts/connection";
-import { useMarkets } from "../../contexts/market";
 import { useUserBalance, useUserTotalBalance } from "../../hooks";
-import { WRAPPED_SOL_MINT } from "../../utils/ids";
-import { formatUSD } from "../../utils/utils";
-import { UserInfoType } from "src/types/octokit";
-import * as gh from "../../actions/github";
+import { UserInfoType, UserReposType } from "src/types/octokit";
 
 export const HomeView = () => {
   const { marketEmitter, midPriceInUSD } = useMarkets();
@@ -22,6 +23,7 @@ export const HomeView = () => {
   const SOL = useUserBalance(WRAPPED_SOL_MINT);
   const { balanceInUSD: totalBalanceInUSD } = useUserTotalBalance();
   const [userInfo, setUserInfo] = useState<UserInfoType | null>(null);
+  const [userRepos, setUserRepos] = useState<UserReposType[] | null>(null);
 
   useEffect(() => {
     const refreshTotal = () => {};
@@ -38,7 +40,7 @@ export const HomeView = () => {
   }, [marketEmitter, midPriceInUSD, tokenMap]);
 
   useEffect(() => {
-    const ghToken = Cookies.get('gh_token');
+    const ghToken = Cookies.get('gh_token') || '';
 
     async function getAccessToken() {
       const code = gh.parseOAuthCode() || null;      
@@ -56,17 +58,44 @@ export const HomeView = () => {
 
     if (isEmpty(ghToken)) {
       getAccessToken();
+    } else {
+      getUserInfo(ghToken);
+    }
+  }, [])
+
+  useEffect(() => {
+    const ghToken = Cookies.get('gh_token') || '';
+
+    async function getUserRepos() {
+      const { data } = await axios.get(`http://localhost:4000/repos/user?ghToken=${ghToken}&username=${userInfo?.login}`);
+      setUserRepos(data.data.data);
+    }
+
+    if (userInfo?.login) {
+      getUserRepos();
     }
   }, [userInfo])
 
+  const getUserInfo = async (ghToken: string) => {
+    const { data } = await axios.get(`http://localhost:4000/user?ghToken=${ghToken}`);
+    setUserInfo(data.data.data);
+  }
+
   return (
     <Row gutter={[16, 16]} align="middle">
-      <Col span={24}>
+      <Col span={24} style={{textAlign: 'left', padding: '2rem'}}>
         { userInfo &&
           <>
             {userInfo.login} is connected! <br />
             Public repos: {userInfo.public_repos} <br />
           </>
+        }
+        {
+          userRepos && userInfo && userRepos.map((repo, i) =>
+            <div key={i}>
+              <Repository repo={repo} username={userInfo.login} />
+            </div>
+          )
         }
         <h2>Your balances ({formatUSD.format(totalBalanceInUSD)}):</h2>
         <h2>
