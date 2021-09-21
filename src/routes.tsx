@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from "styled-components";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { WalletProvider } from "@solana/wallet-adapter-react";
 import { ConnectionProvider } from "./contexts/connection";
@@ -18,6 +18,8 @@ import {
   getSolongWallet,
   getTorusWallet,
 } from "@solana/wallet-adapter-wallets";
+import {Layout} from "antd";
+import MainLayout from "./components/shared/MainLayout";
 
 export function Routes() {
   const wallets = useMemo(
@@ -40,24 +42,41 @@ export function Routes() {
   );
 
   return (
-    <BrowserRouter basename={"/"}>
-      <ConnectionProvider>
-        <WalletProvider wallets={wallets} autoConnect>
-          <AccountsProvider>
-            <MarketProvider>
-              <ThemeProvider theme={theme}>
-                <AppLayout>
-                  <Switch>
-                    <Route exact path="/" component={() => <HomeView />} />
-                    <Route exact path="/faucet" children={<FaucetView />} />
-                    <Route exact path="/github/callback" children={<OAuthCallbackView />} />
-                  </Switch>
-                </AppLayout>
-              </ThemeProvider>
-            </MarketProvider>
-          </AccountsProvider>
-        </WalletProvider>
-      </ConnectionProvider>
-    </BrowserRouter>
+      <BrowserRouter>
+          <MainLayout>
+              <ConnectionProvider>
+                  <WalletProvider wallets={wallets} autoConnect>
+                      <AccountsProvider>
+                          <MarketProvider>
+                            <Route exact path="/" component={HomeView} />
+                          </MarketProvider>
+                      </AccountsProvider>
+                  </WalletProvider>
+              </ConnectionProvider>
+          </MainLayout>
+      </BrowserRouter>
+    // <BrowserRouter basename={"/"}>
+    //   <ConnectionProvider>
+    //     <WalletProvider wallets={wallets} autoConnect>
+    //       <AccountsProvider>
+    //         <MarketProvider>
+    //           <ThemeProvider theme={theme}>
+    //             <AppLayout>
+    //               <Switch>
+    //                 <Route exact path="/" component={() => <HomeView />} />
+    //                 <Route exact path="/faucet" children={<FaucetView />} />
+    //                 <Route
+    //                   exact
+    //                   path="/github/callback"
+    //                   children={<OAuthCallbackView />}
+    //                 />
+    //               </Switch>
+    //             </AppLayout>
+    //           </ThemeProvider>
+    //         </MarketProvider>
+    //       </AccountsProvider>
+    //     </WalletProvider>
+    //   </ConnectionProvider>
+    // </BrowserRouter>
   );
 }

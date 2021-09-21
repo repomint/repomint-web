@@ -27,7 +27,7 @@ export type UserInfoType = {
   site_admin: boolean;
   starred_url: string;
   subscriptions_url: string;
-  twitter_username: string
+  twitter_username: string;
   type: string;
   updated_at: string;
   url: string;

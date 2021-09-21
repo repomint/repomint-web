@@ -43,15 +43,17 @@ export const HomeView = () => {
     const ghToken = Cookies.get('gh_token') || '';
 
     async function getAccessToken() {
-      const code = gh.parseOAuthCode() || null;      
+      const code = gh.parseOAuthCode() || null;
 
       if (code) {
-        const { data } = await axios.get(`http://localhost:4000/auth?code=${code}`);
+        const { data } = await axios.get(
+          `http://localhost:4000/auth?code=${code}`
+        );
         if (data.success && !isEmpty(data.data.token)) {
-          Cookies.set('gh_token', data.data.token)
+          Cookies.set("gh_token", data.data.token);
         } else {
-          console.log('reauthenticate on click of connect to github button')
-          window.location.href = `https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GITHUB_OAUTH_CLIENT_ID}`
+          console.log("reauthenticate on click of connect to github button");
+          window.location.href = `https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GITHUB_OAUTH_CLIENT_ID}`;
         }
       }
     }
@@ -74,7 +76,7 @@ export const HomeView = () => {
     if (userInfo?.login) {
       getUserRepos();
     }
-  }, [userInfo])
+  }, [userInfo]);
 
   const getUserInfo = async (ghToken: string) => {
     const { data } = await axios.get(`http://localhost:4000/user?ghToken=${ghToken}`);
@@ -82,42 +84,44 @@ export const HomeView = () => {
   }
 
   return (
-    <Row gutter={[16, 16]} align="middle">
-      <Col span={24} style={{textAlign: 'left', padding: '2rem'}}>
-        { userInfo &&
-          <>
-            {userInfo.login} is connected! <br />
-            Public repos: {userInfo.public_repos} <br />
-          </>
-        }
-        {
-          userRepos && userInfo && userRepos.map((repo, i) =>
-            <div key={i}>
-              <Repository repo={repo} username={userInfo.login} />
-            </div>
-          )
-        }
-        <h2>Your balances ({formatUSD.format(totalBalanceInUSD)}):</h2>
-        <h2>
-          SOL: {SOL.balance} ({formatUSD.format(SOL.balanceInUSD)})
-        </h2>
-        <h2 style={{ display: "inline-flex", alignItems: "center" }}>
-          <TokenIcon mintAddress={SRM_ADDRESS} /> SRM: {SRM?.balance} (
-          {formatUSD.format(SRM?.balanceInUSD)})
-        </h2>
-      </Col>
+      <div>
+        <div className="bg-gray-200 overflow-hidden rounded-lg h-52 mb-8">
+          <div className="px-4 py-5 sm:p-6">Home Hero section</div>
+        </div>
 
-      <Col span={12}>
-        <WalletMultiButton type="ghost" />
-      </Col>
-      <Col span={12}>
-        <Link to="/faucet">
-          <Button>Faucet</Button>
-        </Link>
-      </Col>
-      <Col span={24}>
-        <div className="builton" />
-      </Col>
-    </Row>
+        <div>
+          Home page items
+        </div>
+      </div>
+    // <Row gutter={[16, 16]} align="middle">
+    //   <Col span={24}>
+    //     {userInfo && (
+    //       <>
+    //         {userInfo.login} is connected! <br />
+    //         Public repos: {userInfo.public_repos} <br />
+    //       </>
+    //     )}
+    //     <h2>Your balances ({formatUSD.format(totalBalanceInUSD)}):</h2>
+    //     <h2>
+    //       SOL: {SOL.balance} ({formatUSD.format(SOL.balanceInUSD)})
+    //     </h2>
+    //     <h2 style={{ display: "inline-flex", alignItems: "center" }}>
+    //       <TokenIcon mintAddress={SRM_ADDRESS} /> SRM: {SRM?.balance} (
+    //       {formatUSD.format(SRM?.balanceInUSD)})
+    //     </h2>
+    //   </Col>
+    //
+    //   <Col span={12}>
+    //     <WalletMultiButton type="ghost" />
+    //   </Col>
+    //   <Col span={12}>
+    //     <Link to="/faucet">
+    //       <Button>Faucet</Button>
+    //     </Link>
+    //   </Col>
+    //   <Col span={24}>
+    //     <div className="builton" />
+    //   </Col>
+    // </Row>
   );
 };

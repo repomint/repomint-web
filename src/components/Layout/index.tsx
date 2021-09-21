@@ -6,7 +6,7 @@ import { WalletModalProvider } from "@solana/wallet-adapter-ant-design";
 
 import { LABELS } from "../../constants";
 import { AppBar } from "../AppBar";
-import * as Styles from './styled';
+import * as Styles from "./styled";
 
 const { Header } = Layout;
 
@@ -25,9 +25,7 @@ export const AppLayout = React.memo(({ children }) => {
             <AppBar />
           </Header>
           <Styles.Main>
-            <Styles.MainContent>
-              {children}
-            </Styles.MainContent>
+            <Styles.MainContent>{children}</Styles.MainContent>
           </Styles.Main>
         </Layout>
       </div>

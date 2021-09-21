@@ -1,3 +1,3 @@
 export interface GithubAccount {
-    token: string
+  token: string;
 }

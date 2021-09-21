@@ -5,16 +5,16 @@ declare module "styled-components" {
   export interface DefaultTheme {
     colors: {
       [key: string]: string;
-      white: string,
-      black: string,
-      mintGreen: string,
-      lightPurple: string,
-      darkBlue: string,
-      gray: string,
-      lightGray: string,
-      paleGray: string,
-      darkGray: string,
-      darkerGray: string,
+      white: string;
+      black: string;
+      mintGreen: string;
+      lightPurple: string;
+      darkBlue: string;
+      gray: string;
+      lightGray: string;
+      paleGray: string;
+      darkGray: string;
+      darkerGray: string;
     };
     breakpoints: {
       xs: string;
@@ -97,7 +97,7 @@ export const theme: DefaultTheme = {
     normal: 400,
     semiBold: 500,
     bold: 600,
-    bolder: 700
+    bolder: 700,
   },
   border: {
     "10px": "0.625rem",
