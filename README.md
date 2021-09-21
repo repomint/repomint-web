@@ -28,6 +28,10 @@ Then `yarn` to set up. `yarn start` to launch :rocket:.
 3. Flask app [`repomint-art`](https://github.com/repomint/repomint-art) for generative art service
 4. Flask prototype [`repomint-mint`](https://github.com/repomint/repomint-auth) to manage minting
 
+# Notes on using Redux and basic navigation
+
+Please use useHistory() and history.push('route') to fully use SPA features and redux will persist throughout route changes, although full reload of page will restart redux store - so for full persistence, we will store some necessary values in localStorage/cookies.
+
 # Summary
 
 ### -  *[Contributors](#Contributors)*
