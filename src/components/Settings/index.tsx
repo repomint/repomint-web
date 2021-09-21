@@ -30,18 +30,18 @@ export const Settings = () => {
       <div style={{ display: "grid" }}>
         {
           isLoggedIn ?
-          <>
-            Github Connected <br />
-            <Button type="primary" onClick={logout}>
-              Logout
-            </Button>  
-          </>
-          :
-          <Button type="primary" href={`https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GITHUB_OAUTH_CLIENT_ID}`}>
-            Connect to GitHub
-          </Button>
+            <>
+              Github Connected <br />
+              <Button type="primary" onClick={logout}>
+                Logout
+              </Button>
+            </>
+            :
+            <Button type="primary" href={`https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GITHUB_OAUTH_CLIENT_ID}`}>
+              Connect to GitHub
+            </Button>
         }
-        <hr/>
+        <hr />
 
         Network:{" "}
         <Select
