@@ -33,6 +33,12 @@ export type UserInfoType = {
   url: string;
 }
 
+export type RepoOwnerType = {
+  [key:string]: any;
+  login: string;
+  id: number;
+}
+
 export type UserReposType = {
   allow_forking: boolean;
   archive_url: string; //"https://api.github.com/repos/idiglove/amplify-js/{archive_format}{/ref}"
@@ -88,7 +94,7 @@ export type UserReposType = {
   notifications_url: string; //"https://api.github.com/repos/idiglove/amplify-js/notifications{?since,all,participating}"
   open_issues: number;
   open_issues_count: number;
-  owner: object; //{login: "idiglove", id: 29911508, node_id: "MDQ6VXNlcjI5OTExNTA4",…}
+  owner: RepoOwnerType;
   permissions: object; //{admin: true, maintain: true, push: true, triage: true, pull: true}
   private: boolean;
   pulls_url: string; //"https://api.github.com/repos/idiglove/amplify-js/pulls{/number}"

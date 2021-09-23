@@ -7,7 +7,7 @@ import { AccountsProvider } from "./contexts/accounts";
 import { MarketProvider } from "./contexts/market";
 import { AppLayout } from "./components/Layout";
 
-import { FaucetView, HomeView, OAuthCallbackView } from "./views";
+import { FaucetView, HomeView, OAuthCallbackView, ReposView } from "./views";
 import { theme } from "src/styles/theme";
 import {
   getLedgerWallet,
@@ -50,7 +50,8 @@ export function Routes() {
                   <Switch>
                     <Route exact path="/" component={() => <HomeView />} />
                     <Route exact path="/faucet" children={<FaucetView />} />
-                    <Route exact path="/github/callback" children={<OAuthCallbackView />} />
+                    <Route exact path="/github/callback" component={() => <OAuthCallbackView />} />
+                    <Route exact path="/repos" component={() => <ReposView />} />
                   </Switch>
                 </AppLayout>
               </ThemeProvider>
