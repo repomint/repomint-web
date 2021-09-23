@@ -5,7 +5,7 @@ import { Settings } from "../Settings";
 import { LABELS } from "../../constants";
 import {
   WalletDisconnectButton,
-  WalletMultiButton,
+  // WalletMultiButton,
 } from "@solana/wallet-adapter-ant-design";
 import { useWallet } from "@solana/wallet-adapter-react";
 
@@ -13,7 +13,8 @@ export const AppBar = (props: { left?: JSX.Element; right?: JSX.Element }) => {
   const { connected } = useWallet();
   const TopBar = (
     <div className="App-Bar-right">
-      <WalletMultiButton type="primary" />
+      {/* removing for now */}
+      {/* <WalletMultiButton type="primary" /> */}
       <div style={{ margin: 5 }} />
       {connected ? <WalletDisconnectButton type="ghost" /> : null}
       <Popover

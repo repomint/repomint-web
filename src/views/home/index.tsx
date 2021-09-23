@@ -7,9 +7,9 @@ import { useHistory } from "react-router-dom";
 import React, { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserInfo } from "src/redux/slices/userSlice";
-import { WalletMultiButton } from "@solana/wallet-adapter-ant-design";
+// import { WalletMultiButton } from "@solana/wallet-adapter-ant-design";
 // internal deps
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import * as gh from "../../actions/github";
 import { RootState } from "src/redux/store";
 import { formatUSD } from "../../utils/utils";
@@ -76,8 +76,8 @@ export const HomeView = () => {
   }, [getUserInfo])
 
   return (
-    <Row gutter={[16, 16]} align="middle">
-      <Col span={24} style={{textAlign: 'left', padding: '2rem'}}>
+    <Row align="middle">
+      <Col className="text-left p-8">
         { userInfo &&
           <>
             {userInfo.login} is connected! <br />
@@ -95,7 +95,8 @@ export const HomeView = () => {
         </h2>
       </Col>
 
-      <Col span={12}>
+      {/* removing for now */}
+      {/* <Col span={12}>
         <WalletMultiButton type="ghost" />
       </Col>
       <Col span={12}>
@@ -105,7 +106,7 @@ export const HomeView = () => {
       </Col>
       <Col span={24}>
         <div className="builton" />
-      </Col>
+      </Col> */}
     </Row>
   );
 };

@@ -32,6 +32,12 @@ Then `yarn` to set up. `yarn start` to launch :rocket:.
 
 Please use useHistory() and history.push('route') to fully use SPA features and redux will persist throughout route changes, although full reload of page will restart redux store - so for full persistence, we will store some necessary values in localStorage/cookies.
 
+# Styling
+
+We will be using TailwindCSS, the reason behind it is that more devs are familiar with this.
+In case of css specifity issues, let's use css modules or just normal scss.
+Check out the cheatcheet https://nerdcave.com/tailwind-cheat-sheet
+
 # Summary
 
 ### -  *[Contributors](#Contributors)*
